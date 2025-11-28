@@ -34,7 +34,7 @@ cd /D/AI-Tools-Zoomcamp/Homework01
 # 2. Initialize uv project (if not done)
 uv init
 
-# 3. Add Django - THE ANSWER
+# ANSWER 1: 3. Add Django
 uv add django
 
 # 4. Create Django project using module syntax
@@ -107,7 +107,7 @@ D:.
 ```
 
 ```python
-# ANSWER: We need to edit myproject/settings.py to include your newly created app.
+# ANSWER 2: We need to edit myproject/settings.py to include your newly created app.
 # Open myproject/settings.py and find the INSTALLED_APPS list (around line 33). Add our app:
 
 # Edit myproject/settings.py
@@ -136,6 +136,13 @@ What's the next step you need to take?
 - Run migrations
 - Create a makefile
 
+```
+ANSWER 3: Run migrations
+After creating models, we need to run migrations to:
+1. Create the database schema based on our models
+2. Generate the actual database tables
+3. Make our models functional
+```
 
 ## Question 4. TODO Logic
 
@@ -146,6 +153,15 @@ Let's now ask AI to implement the logic for the TODO app. Where do we put it?
 - `admin.py`
 - `tests.py`
 
+```
+ANSWER 4: views.py
+Views contain the business logic and handle the application's behavior. Views (views.py) is where we implement:
+- Business logic
+- Request handling
+- Database operations (CRUD)
+- Data processing
+- Response generation (HTML, JSON, etc.)
+```
 
 ## Question 5. Templates
 
@@ -157,6 +173,11 @@ Where do you need to register the directory with the templates?
 - `TEMPLATES['DIRS']` in project's `settings.py`
 - `TEMPLATES['APP_DIRS']` in project's `settings.py`
 - In the app's `urls.py`
+
+```
+ANSWER 5: TEMPLATES['DIRS'] in project's settings.py
+When we create custom template directories (especially project-level templates), we need to register them in the TEMPLATES['DIRS'] setting so Django knows where to find them.
+```
 
 ## Question 6. Tests
 
@@ -174,6 +195,16 @@ What's the command you use for running tests in the terminal?
 - `python manage.py test`
 - `python -m django run_tests`
 - `django-admin test`
+
+```
+ANSWER 6: python manage.py test
+This is Django's built-in test runner that:  
+1. Discovers all tests in your project
+2. Creates a test database
+3. Runs all tests
+4. Cleans up the test database
+5. Reports results
+```
 
 ## Running the app
 
