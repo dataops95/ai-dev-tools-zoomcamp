@@ -176,7 +176,8 @@ Where do you need to register the directory with the templates?
 
 ```
 ANSWER 5: TEMPLATES['DIRS'] in project's settings.py
-When we create custom template directories (especially project-level templates), we need to register them in the TEMPLATES['DIRS'] setting so Django knows where to find them.
+When we create custom template directories (especially project-level templates), 
+we need to register them in the TEMPLATES['DIRS'] setting so Django knows where to find them.
 ```
 
 ## Question 6. Tests
