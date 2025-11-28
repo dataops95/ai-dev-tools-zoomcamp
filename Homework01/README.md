@@ -250,12 +250,50 @@ This is Django's built-in test runner that:
 5. Reports results
 ```
 
+```bash
+# Run all tests
+uv run python manage.py test
+
+# Run tests for a specific app
+uv run python manage.py test myapp
+
+# Run a specific test class
+uv run python manage.py test myapp.tests.TaskModelTestCase
+
+# Run a specific test method
+uv run python manage.py test myapp.tests.TaskModelTestCase.test_task_creation
+
+# Run tests with verbosity
+uv run python manage.py test --verbosity=2
+
+# Keep test database (useful for debugging)
+uv run python manage.py test --keepdb
+```
+
+### Expected Output:
+```
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+...................
+----------------------------------------------------------------------
+Ran 19 tests in 0.123s
+
+OK
+Destroying test database for alias 'default'...
+
+```
+
+
+
+
 ## Running the app
 
 Now the application is developed and tested. Run it:
 
 ```bash
 python manage.py runserver
+# For uv:
+uv run python manage.py runserver
 ```
 
 Since we asked AI to test everything, it should just work. If it doesn't, iterate with AI until it works. 
