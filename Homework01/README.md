@@ -143,6 +143,24 @@ After creating models, we need to run migrations to:
 2. Generate the actual database tables
 3. Make our models functional
 ```
+```bash
+# Step 1. Create the model (done in myapp/models.py)
+
+# Step 2: Create migration files (tells Django what changed)
+uv run python manage.py makemigrations
+# Expected output:
+# Migrations for 'myapp':
+#   myapp/migrations/0001_initial.py
+#     - Create model Task
+
+# Step 3: Apply migrations (creates the actual database tables)
+uv run python manage.py migrate
+# Expected output:
+# Operations to perform:
+#   Apply all migrations: admin, auth, contenttypes, myapp, sessions
+# Running migrations:
+#   Applying myapp.0001_initial... OK
+```
 
 ## Question 4. TODO Logic
 
@@ -179,6 +197,31 @@ ANSWER 5: TEMPLATES['DIRS'] in project's settings.py
 When we create custom template directories (especially project-level templates), 
 we need to register them in the TEMPLATES['DIRS'] setting so Django knows where to find them.
 ```
+
+```bash
+# Step 1: Create Template Directory Structure
+# Create templates directory in your project root
+mkdir -p templates/myapp
+
+# Our structure should look like:
+F:.
+├── templates/
+│   ├── base.html
+│   ├── home.html
+│   └── myapp/
+│       ├── task_list.html
+│       ├── task_form.html
+│       └── task_confirm_delete.html
+├── myproject/
+│   └── settings.py
+└── myapp/
+```
+
+```bash
+# Step 2: Register Templates Directory in settings.py
+
+```
+
 
 ## Question 6. Tests
 

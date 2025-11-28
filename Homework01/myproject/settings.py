@@ -55,10 +55,16 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        # DIRS: Custom template directories (project-level)
+        'DIRS': [
+            BASE_DIR / 'templates',  # <-- Added this line to register templates directory
+        ],
+        # APP_DIRS: Auto-discover templates in installed apps
+        # Keep True to find app-level templates
+        'APP_DIRS': True,            # This allows Django to find templates in app directories
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
