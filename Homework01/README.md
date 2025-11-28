@@ -83,7 +83,7 @@ What's the file you need to edit for that?
 - `urls.py`
 - `wsgi.py`
 
-````bash
+```bash
 # Create an app called "myapp"
 uv run python manage.py startapp myapp
 
@@ -106,9 +106,11 @@ D:.
         __init__.py
 ```
 
+```python
 # ANSWER: We need to edit myproject/settings.py to include your newly created app.
 # Open myproject/settings.py and find the INSTALLED_APPS list (around line 33). Add our app:
-```python# myproject/settings.py
+
+# Edit myproject/settings.py
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -120,9 +122,6 @@ INSTALLED_APPS = [
     'myapp',  # <-- Add this line
 ]
 ```
-
-
-
 
 ## Question 3: Django Models
 
