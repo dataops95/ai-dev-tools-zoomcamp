@@ -271,16 +271,30 @@ uv run python manage.py test --keepdb
 ```
 
 ### Expected Output:
-```
+```bash
+$ uv run python manage.py test
+Found 21 test(s).
 Creating test database for alias 'default'...
 System check identified no issues (0 silenced).
-...................
+.....................
 ----------------------------------------------------------------------
-Ran 19 tests in 0.123s
+Ran 21 tests in 0.085s
 
 OK
 Destroying test database for alias 'default'...
+```
 
+```bash
+$ uv run python manage.py test myapp
+Found 21 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.....................
+----------------------------------------------------------------------
+Ran 21 tests in 0.095s
+
+OK
+Destroying test database for alias 'default'...
 ```
 
 
