@@ -1,12 +1,13 @@
+# myapp/tests.py
+
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
 from datetime import timedelta
 from typing import Dict, Any
+from time import sleep  # Add this import
 from .models import Task
 
-# Create your tests here.
-# myapp/tests.py
 
 class TaskModelTestCase(TestCase):
     """
@@ -81,14 +82,28 @@ class TaskModelTestCase(TestCase):
     
     def test_task_ordering(self) -> None:
         """Test that tasks are ordered by created_at descending."""
+        # Create first task
         task1 = Task.objects.create(title='First Task')
+        
+        # Small delay to ensure different timestamps
+        sleep(0.01)
+        
+        # Create second task
         task2 = Task.objects.create(title='Second Task')
         
+        # Fetch tasks with ordering
         tasks = Task.objects.all()
+        
+        # The second task should be first (newest first)
+        self.assertEqual(tasks[0].title, 'Second Task')
+        self.assertEqual(tasks[1].title, 'First Task')
+        
+        # Also verify by comparing objects
         self.assertEqual(tasks[0], task2)  # Newest first
-        self.assertEqual(tasks[1], task1)
+        self.assertEqual(tasks[1], task1)  # Oldest last
 
 
+# Rest of your test classes remain the same...
 class TaskViewTestCase(TestCase):
     """
     Test cases for Task views.
@@ -243,6 +258,11 @@ class TaskURLTestCase(TestCase):
     def setUp(self) -> None:
         """Set up test data."""
         self.task = Task.objects.create(title='Test Task')
+    
+    def test_home_url_resolves(self) -> None:
+        """Test that home URL resolves."""
+        url = reverse('home')
+        self.assertEqual(url, '/')
     
     def test_task_list_url_resolves(self) -> None:
         """Test that task list URL resolves."""

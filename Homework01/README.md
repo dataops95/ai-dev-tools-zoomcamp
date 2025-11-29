@@ -300,15 +300,13 @@ Since we asked AI to test everything, it should just work. If it doesn't, iterat
 
 ## Screenshots
 
-Add Task
+### Add Task
 
 ![ToDo - Add Task](images/ToDo-AddTask.jpg)
 
-Task List
+### Task List
 
 ![ToDo - Task List](images/ToDo-TaskList.jpg)
-
-Place the image files at images/ToDo-AddTask.jpg and images/ToDo-TaskList.jpg in the repository.
 
 ## Homework URL
 
