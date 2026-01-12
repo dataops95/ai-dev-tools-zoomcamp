@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: YouTube Video Summarizer API
+  description: API for extracting transcripts and generating AI-powered summaries for YouTube videos
+  version: 1.0.0
+  contact:
+    name: API Support
+
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /api/health:
+    get:
+      summary: Health check endpoint
+      description: Check if the API is running and healthy
+      tags:
+        - Health
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: healthy
+                  service:
+                    type: string
+                    example: YouTube Video Summarizer API
+                  version:
+                    type: string
+                    example: 1.0.0
+
+  /api/videos/process:
+    post:
+      summary: Process YouTube video
+      description: Extract transcript from a YouTube video and generate an AI-powered summary with chapter breakdown
+      tags:
+        - Videos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - youtube_url
+                - gemini_api_key
+              properties:
+                youtube_url:
+                  type: string
+                  description: YouTube video URL (supports various formats)
+                  example: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+                gemini_api_key:
+                  type: string
+                  description: Google Gemini API key for generating summaries
+                  example: AIzaSyABC123def456GHI789jkl012MNO345pqr
+      responses:
+        '200':
+          description: Successfully processed video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoProcessResponse'
+        '400':
+          description: Bad request - Invalid URL or transcript not available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error - Failed to generate summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    VideoProcessResponse:
+      type: object
+      properties:
+        video_title:
+          type: string
+          description: Title of the YouTube video
+          example: Amazing Tutorial Video
+        duration:
+          type: string
+          description: Duration of the video
+          example: "15:30"
+        summary:
+          type: string
+          description: AI-generated summary of the video (3-5 sentences)
+          example: This video provides a comprehensive introduction to the topic. It covers fundamental concepts and practical applications. The presenter explains complex ideas in an accessible manner.
+        chapters:
+          type: array
+          description: Chapter breakdown with timestamps
+          items:
+            $ref: '#/components/schemas/Chapter'
+      required:
+        - video_title
+        - duration
+        - summary
+        - chapters
+
+    Chapter:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Chapter timestamp in HH:MM:SS format
+          example: "00:05:30"
+        title:
+          type: string
+          description: Chapter title
+          example: Introduction to Core Concepts
+        description:
+          type: string
+          description: Brief description of the chapter content
+          example: Overview of fundamental principles and key terminology
+      required:
+        - timestamp
+        - title
+        - description
+
+    ErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Error message describing what went wrong
+          example: Invalid YouTube URL. Please provide a valid YouTube video URL.
+      required:
+        - detail
+
+tags:
+  - name: Health
+    description: Health check operations
+  - name: Videos
+    description: Video processing operations
